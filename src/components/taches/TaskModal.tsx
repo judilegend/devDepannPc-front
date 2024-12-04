@@ -22,6 +22,8 @@ import { useTasks } from "@/contexts/TaskContext";
 import { userService } from "@/services/userService";
 import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
+//typer task
+import { ApiTask, Task } from "@/types/task";
 
 interface TaskModalProps {
   isOpen: boolean;
@@ -92,7 +94,7 @@ export function TaskModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const taskData = {
+      const taskData: any = {
         ...formData,
         assignedUserId:
           formData.assignedUserId === "0"

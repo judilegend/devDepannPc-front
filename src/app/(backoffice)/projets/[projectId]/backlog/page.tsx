@@ -29,7 +29,7 @@ export default function BacklogPage() {
         : [state.projectTasks];
       setLocalTasks(
         tasks.map((task) => ({
-          task_id: task.id,
+          task_id: task.id ?? 0,
           task_title: task.title,
           task_description: task.description,
           status: task.status,

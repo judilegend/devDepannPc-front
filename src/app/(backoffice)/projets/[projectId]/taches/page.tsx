@@ -7,12 +7,13 @@ import { TaskStats } from "@/components/taches/TaskStats";
 import { useCurrentProject } from "@/contexts/CurrentProjectContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { ApiTask } from "@/types/task";
+import { Task } from "@/types/task";
 
 export default function ProjectTasksPage() {
   const { currentProject } = useCurrentProject();
   const { state, fetchProjectTasks } = useTasks();
   const { user } = useAuth();
-  const [assignedTasks, setAssignedTasks] = useState<ApiTask[]>([]);
+  const [assignedTasks, setAssignedTasks] = useState<any>([]);
 
   useEffect(() => {
     const loadTasks = async () => {
@@ -50,7 +51,7 @@ export default function ProjectTasksPage() {
   }, [state.projectTasks, user]);
 
   const getTasksByStatus = (status: string) => {
-    return assignedTasks.filter((task) => task.status === status);
+    return assignedTasks.filter((task: any) => task.status === status);
   };
 
   const taskStatusSections = [
@@ -90,7 +91,7 @@ export default function ProjectTasksPage() {
                     </span>
                   </div>
                   <div className="grid gap-4">
-                    {tasks.map((task) => (
+                    {tasks.map((task: any) => (
                       <BacklogCard
                         key={task.task_id}
                         task={{

@@ -27,9 +27,41 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+//type notification
+interface NotificationData {
+  taskId?: string;
+  url?: string;
+}
+
+interface Notification {
+  id: string;
+  type: string;
+  title: string;
+  body: string;
+  message: string;
+  timestamp: string;
+  read: boolean;
+  data?: NotificationData;
+  createdAt: string;
+  updatedAt: string;
+}
+
+type NotificationProps = {
+  notifications: Notification[];
+  unreadCount: number;
+  markAsRead: (id: string) => void;
+};
+
+interface NavbarProps {
+  onMenuClick: () => void;
+  isMobileMenuOpenFix: boolean;
+}
 //implementer le read push url
 
-export default function Navbar() {
+export default function Navbar({
+  onMenuClick,
+  isMobileMenuOpenFix,
+}: NavbarProps) {
   const [userMenu, setUserMenu] = useState(false);
   const [projectMenu, setProjectMenu] = useState(false);
   const { currentProject, selectProject } = useCurrentProject();
@@ -84,12 +116,7 @@ export default function Navbar() {
   //declare la fonction click task
   const handleNotificationClick = (notification: Notification) => {
     markAsRead(notification.id);
-    if (
-      "data" in notification &&
-      notification.data?.taskId &&
-      currentProject?.id
-    ) {
-      // Construct URL with current project ID
+    if (notification.data?.taskId && currentProject?.id) {
       const taskUrl = `/projets/${currentProject.id}/taches`;
       router.push(taskUrl);
     }
@@ -115,7 +142,7 @@ export default function Navbar() {
                 !notification.read ? "bg-blue-50" : ""
               }`}
               onClick={() =>
-                handleNotificationClick(notification as Notification)
+                handleNotificationClick(notification as unknown as Notification)
               }
             >
               <div className="flex items-start justify-between">

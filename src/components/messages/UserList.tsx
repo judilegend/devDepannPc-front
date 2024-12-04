@@ -146,7 +146,7 @@ export const UserList = ({ currentUserId, onUserSelect }: UserListProps) => {
   );
 
   const handleRoomSelect = useCallback(
-    (room) => {
+    (room: any) => {
       setSelectedRoom(room);
       loadRoomMessages(room.id);
       markGroupMessagesAsRead(room.id);

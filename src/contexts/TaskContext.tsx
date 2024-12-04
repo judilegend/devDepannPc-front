@@ -237,10 +237,10 @@ export function TaskProvider({ children }: { children: ReactNode }) {
             badge: "/icons/badge-icon.png",
             data: payload.data,
             requireInteraction: true,
-            actions: [
-              { action: "open", title: "Voir la tâche" },
-              { action: "close", title: "Fermer" },
-            ],
+            // actions: [
+            //   { action: "open", title: "Voir la tâche" },
+            //   { action: "close", title: "Fermer" },
+            // ],
           });
         }
       }

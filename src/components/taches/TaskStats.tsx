@@ -1,9 +1,9 @@
-import { Task } from "@/types/task";
+import { ApiTask } from "@/types/task";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 
 interface TaskStatsProps {
-  tasks: Task[];
+  tasks: ApiTask[];
 }
 
 export function TaskStats({ tasks }: TaskStatsProps) {

@@ -11,6 +11,7 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Task } from "@/types/task";
+import { ApiTask } from "@/types/task";
 import { useTasks } from "@/contexts/TaskContext";
 import { taskStatusMiddleware } from "@/middleware/taskStatusMiddleware";
 import { useAuth } from "@/contexts/AuthContext";
