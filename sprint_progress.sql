@@ -8,8 +8,8 @@ SELECT
     SUM(CASE t.status WHEN 'review' THEN 1 ELSE 0 END) as review_tasks,
     SUM(CASE t.status WHEN 'todo' THEN 1 ELSE 0 END) as todo_tasks
 FROM 
-    Sprints s
-    LEFT JOIN Taches t ON s.id = t.sprintId
+    sprints s
+    LEFT JOIN taches t ON s.id = t.sprintId
 GROUP BY 
     t.sprintId;
 
@@ -42,7 +42,7 @@ BEGIN
         sprintId = p_sprint_id;
 
     -- Update sprint progress and status
-    UPDATE Sprints 
+    UPDATE sprints 
     SET 
         progress = v_progress,
         status = CASE 
@@ -57,7 +57,7 @@ END //
 
 -- Trigger for task status changes
 CREATE TRIGGER trg_sprint_task_status_update
-AFTER UPDATE ON Taches
+AFTER UPDATE ON taches
 FOR EACH ROW
 BEGIN
     IF NEW.sprintId IS NOT NULL AND (OLD.status != NEW.status OR OLD.sprintId != NEW.sprintId) THEN
@@ -71,7 +71,7 @@ END //
 
 -- Trigger for new tasks added to sprint
 CREATE TRIGGER trg_sprint_task_insert
-AFTER INSERT ON Taches
+AFTER INSERT ON taches
 FOR EACH ROW
 BEGIN
     IF NEW.sprintId IS NOT NULL THEN
@@ -81,7 +81,7 @@ END //
 
 -- Trigger for tasks removed from sprint
 CREATE TRIGGER trg_sprint_task_delete
-AFTER DELETE ON Taches
+AFTER DELETE ON taches
 FOR EACH ROW
 BEGIN
     IF OLD.sprintId IS NOT NULL THEN

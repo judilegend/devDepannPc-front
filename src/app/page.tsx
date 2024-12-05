@@ -1,9 +1,10 @@
-import Image from "next/image";
-
+import { Suspense } from "react";
+import AuthPage from "@/components/auth/AuthPage";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 export default function Home() {
   return (
-    <div>
-      <main></main>
-    </div>
+    <Suspense fallback={<LoadingSpinner />}>
+      <AuthPage type="login" />
+    </Suspense>
   );
 }
