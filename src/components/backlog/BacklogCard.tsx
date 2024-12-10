@@ -88,7 +88,7 @@ export const BacklogCard = memo(function BacklogCard({
             <h4 className="font-bold">{task.title}</h4>
             <p className="text-sm text-gray-500">{task.description}</p>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary" className={getPriorityColor()}>
+              <Badge className={getPriorityColor()}>
                 {task.importance} / {task.urgency}
               </Badge>
               {assignedUser && (
