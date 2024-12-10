@@ -124,7 +124,7 @@ export function WorkPackageList({ projectId }: WorkPackageListProps) {
         {canCreateWorkPackage() && (
           <Button
             onClick={() => setIsModalOpen(true)}
-            className="w-full sm:w-auto bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
+            className="w-full sm:w-auto bg-primary"
           >
             <Plus className="h-4 w-4 mr-2" />
             Nouveau Work Package
