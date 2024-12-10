@@ -7,6 +7,9 @@ import { useCurrentProject } from "@/contexts/CurrentProjectContext";
 import { ApiTask } from "@/types/task";
 import { Suspense } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+
+import { KanbanHeader } from "@/components/backlog/KanbanHeader";
+
 export default function BacklogPage() {
   const { currentProject } = useCurrentProject();
   const { state, fetchProjectTasks, updateTask } = useTasks();
@@ -58,24 +61,44 @@ export default function BacklogPage() {
   };
 
   return (
+    // <Suspense fallback={<LoadingSpinner />}>
+    //   <div className="space-y-8 p-6">
+    //     <div className="flex justify-between items-center">
+    //       <h1 className="text-3xl font-bold text-gray-900">Tableau Kanban</h1>
+    //       <p className="mt-2 text-gray-600">
+    //         Suivez l'avancement de vos tâches et gérez votre temps avec le timer
+    //         Pomodoro
+    //       </p>{" "}
+    //       <div className="flex items-center gap-4">
+    //         <span className="text-sm text-gray-500">
+    //           {localTasks.length} tâches
+    //         </span>
+    //       </div>
+    //     </div>
+    //     <KanbanBoard
+    //       projectId={currentProject?.id.toString() || ""}
+    //       tasks={localTasks}
+    //       onUpdateTask={handleUpdateTask}
+    //     />
+    //     <div className="mt-12">
+    //       <h2 className="text-xl font-semibold mb-6">Matrice des Tâches</h2>
+    //       <TaskMatrix />
+    //     </div>
+    //   </div>
+    // </Suspense>
     <Suspense fallback={<LoadingSpinner />}>
-      <div className="space-y-8 p-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Backlog du Projet</h1>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-500">
-              {localTasks.length} tâches
-            </span>
+      <div className="w-full py-2 sm:py-6 lg:py-8">
+        <KanbanHeader />
+        <div className="space-y-8 ">
+          <KanbanBoard
+            projectId={currentProject?.id.toString() || ""}
+            tasks={localTasks}
+            onUpdateTask={handleUpdateTask}
+          />
+          <div className="mt-12">
+            <h2 className="text-xl font-semibold mb-6">Matrice des Tâches</h2>
+            <TaskMatrix />
           </div>
-        </div>
-        <KanbanBoard
-          projectId={currentProject?.id.toString() || ""}
-          tasks={localTasks}
-          onUpdateTask={handleUpdateTask}
-        />
-        <div className="mt-12">
-          <h2 className="text-xl font-semibold mb-6">Matrice des Tâches</h2>
-          <TaskMatrix />
         </div>
       </div>
     </Suspense>

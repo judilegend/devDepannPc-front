@@ -116,7 +116,7 @@ export default function RootLayout({
                     <TaskProvider>
                       <Toaster position="top-right" />
                       {children}
-                      <PWATestFeatures />
+                      {/* <PWATestFeatures /> */}
                     </TaskProvider>
                   </ActivityProvider>
                 </WorkPackageProvider>
