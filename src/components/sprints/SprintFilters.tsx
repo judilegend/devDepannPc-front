@@ -42,10 +42,10 @@ export function SprintFilters() {
           <SelectValue placeholder="Status" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Status</SelectItem>
-          <SelectItem value="planned">Planned</SelectItem>
-          <SelectItem value="in_progress">In Progress</SelectItem>
-          <SelectItem value="completed">Completed</SelectItem>
+          <SelectItem value="all">Tous </SelectItem>
+          <SelectItem value="planned">Planifié</SelectItem>
+          <SelectItem value="in_progress">En cours</SelectItem>
+          <SelectItem value="completed">Terminé</SelectItem>
         </SelectContent>
       </Select>
 

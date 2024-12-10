@@ -70,27 +70,31 @@ export function SprintCard({ sprint }: SprintCardProps) {
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
                 <span>
-                  {format(new Date(sprint.startDate), "MMM d")} -{" "}
-                  {format(new Date(sprint.endDate), "MMM d, yyyy")}
+                  {format(new Date(sprint.startDate), "d MMM")} -{" "}
+                  {format(new Date(sprint.endDate), "d MMM yyyy")}
                 </span>
               </div>
             </CardDescription>
           </div>
           <Badge className={`${getStatusColor(sprint.status)} text-white`}>
-            {sprint.status.replace("_", " ")}
+            {sprint.status === "in_progress"
+              ? "En cours"
+              : sprint.status === "completed"
+              ? "Terminé"
+              : "Planifié"}
           </Badge>
         </div>
       </CardHeader>
 
       <CardContent className="space-y-4">
         <div>
-          <h4 className="font-semibold mb-2">Goal</h4>
+          <h4 className="font-semibold mb-2">Objectif</h4>
           <p className="text-sm text-gray-600">{sprint.goal}</p>
         </div>
 
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm font-medium">Progress</span>
+            <span className="text-sm font-medium">Progression</span>
             <span className="text-sm text-gray-500">{sprint.progress}%</span>
           </div>
           <Progress value={sprint.progress} className="h-2" />
@@ -99,14 +103,14 @@ export function SprintCard({ sprint }: SprintCardProps) {
         <div className="flex gap-4">
           <div className="flex items-center gap-2">
             <Clock className="h-4 w-4 text-gray-500" />
-            <span className="text-sm">{getDaysRemaining()} days remaining</span>
+            <span className="text-sm">{getDaysRemaining()} jours restants</span>
           </div>
           <div className="flex items-center gap-2">
             <CheckCircle2 className="h-4 w-4 text-green-500" />
             <span className="text-sm">
               {sprint.tasks?.filter((task) => task.status === "done").length ||
                 0}{" "}
-              completed tasks
+              tâches terminées
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -114,7 +118,7 @@ export function SprintCard({ sprint }: SprintCardProps) {
             <span className="text-sm">
               {sprint.tasks?.filter((task) => task.status !== "done").length ||
                 0}{" "}
-              pending tasks
+              tâches en cours
             </span>
           </div>
         </div>
@@ -127,9 +131,8 @@ export function SprintCard({ sprint }: SprintCardProps) {
       </CardContent>
 
       <CardFooter className="flex justify-between">
-        {/* <div className="flex gap-2"> */}
         <Button variant="outline" onClick={() => setShowTasks(!showTasks)}>
-          {showTasks ? "Hide Tasks" : "Show Tasks"}
+          {showTasks ? "Masquer les tâches" : "Afficher les tâches"}
         </Button>
         {user && canAddTaskToSprint() && (
           <Button
@@ -138,18 +141,9 @@ export function SprintCard({ sprint }: SprintCardProps) {
             className="flex items-center gap-2"
           >
             <PlusCircle className="h-4 w-4" />
-            Add Tasks
+            Ajouter des tâches
           </Button>
         )}
-
-        {/* </div> */}
-        {/* <Button
-          variant="secondary"
-          onClick={handleStatusChange}
-          disabled={sprint.status === "completed"}
-        >
-          {sprint.status === "in_progress" ? "Complete Sprint" : "Start Sprint"}
-        </Button> */}
       </CardFooter>
 
       <AddTasksToSprintDialog

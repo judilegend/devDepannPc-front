@@ -1,5 +1,5 @@
 "use client";
-
+import { SprintHeader } from "@/components/sprints/SprintHeader";
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { SprintProvider } from "@/contexts/SprintContext";
@@ -20,8 +20,8 @@ export default function ProjectSprintsPage() {
   return (
     <SprintProvider>
       <div className="container mx-auto py-6">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Project Sprints</h1>
+        <div className="flex justify-between items-start mb-6">
+          <SprintHeader />
           {canCreateSprint() && (
             <Button onClick={() => setOpen(true)}>
               <Plus className="mr-2 h-4 w-4" />
@@ -34,9 +34,9 @@ export default function ProjectSprintsPage() {
 
         <Tabs defaultValue="active" className="mt-6">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="planned">Planned</TabsTrigger>
-            <TabsTrigger value="active">Active</TabsTrigger>
-            <TabsTrigger value="completed">Completed</TabsTrigger>
+            <TabsTrigger value="planned">Planifié</TabsTrigger>
+            <TabsTrigger value="active">En cours</TabsTrigger>
+            <TabsTrigger value="completed">Terminé</TabsTrigger>
           </TabsList>
 
           <TabsContent value="planned" className="mt-4">

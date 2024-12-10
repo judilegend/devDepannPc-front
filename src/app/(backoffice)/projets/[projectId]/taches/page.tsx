@@ -123,7 +123,7 @@ export default function ProjectTasksPage() {
 
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Focus Timer</h2>
+            <h2 className="text-xl font-semibold mb-4">Compteur POMODORO</h2>
             <PomodoroTimer
               onComplete={() => {
                 console.log("Pomodoro completed");
