@@ -1,3 +1,4 @@
+"use client";
 import { Suspense } from "react";
 import { ProjectList } from "@/components/projets/ProjectList";
 import { ProjectsHeader } from "@/components/projets/ProjectsHeader";
