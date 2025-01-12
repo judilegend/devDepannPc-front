@@ -46,7 +46,7 @@ export function MobileSidebar({ isOpen, onOpenChange }: MobileSidebarProps) {
       icon: LayoutDashboard,
     },
     {
-      title: "Flux de travail",
+      title: "Organiser projet",
       url: currentProject ? `/projets/${currentProject.id}/kanban` : "",
       icon: FolderKanban,
     },

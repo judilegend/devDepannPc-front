@@ -47,7 +47,7 @@ export function AppSidebar({ className }: SidebarProps) {
       icon: LayoutDashboard,
     },
     {
-      title: "Flux de travail",
+      title: "Organiser projet",
       url: currentProject ? `/projets/${currentProject.id}/kanban` : "",
       icon: FolderKanban,
     },

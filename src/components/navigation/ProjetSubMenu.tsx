@@ -36,7 +36,7 @@ const ProjectSubmenu = ({
     {
       href: `/projets/${project.id}/kanban`,
       icon: Layout,
-      label: "Flux de travail",
+      label: "Organiser projet",
     },
     {
       href: `/projets/${project.id}/backlog`,
