@@ -3,19 +3,15 @@ import { ProjectList } from "@/components/projets/ProjectList";
 import { ProjectsHeader } from "@/components/projets/ProjectsHeader";
 import { Loader2 } from "lucide-react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { projectService } from "@/services/projectService";
 
 async function getProjects() {
-  const res = await fetch("http://localhost:5000/api/projects", {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
+  try {
+    return await projectService.getAllProjects();
+  } catch (error) {
     throw new Error("Failed to fetch projects");
   }
-
-  return res.json();
 }
-
 export default async function ProjectsPage() {
   const initialProjects = await getProjects();
 
