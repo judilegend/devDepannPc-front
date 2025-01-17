@@ -26,6 +26,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import Image from "next/image";
 
 //type notification
 interface NotificationData {
@@ -223,9 +224,15 @@ export default function Navbar({
               className="flex items-center gap-2 rounded-lg p-2 hover:bg-gray-100"
               aria-label="Menu utilisateur"
             >
-              <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-                <span className="text-primary font-medium">{userInitial}</span>
+              <div className="h-8 w-8rounded-full flex items-center justify-center">
+                <Image
+                  src={"/icons/avatar.jpg"}
+                  alt="avatar"
+                  width={30}
+                  height={30}
+                />
               </div>
+              <span className="text-gray-800 font-medium">{userInitial}</span>
             </button>
 
             {userMenu && (
