@@ -111,11 +111,11 @@ export default function AuthPage({ type }: AuthPageProps) {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="hidden lg:flex lg:w-1/2 bg-white items-center justify-center p-10 relative overflow-hidden"
+          className="hidden lg:flex lg:w-3/5 bg-white items-center  justify-center  relative overflow-hidden"
         >
-          <div className="relative z-10 max-w-2xl">
+          <div className="relative z-10 max-w-4xl">
             <Image
-              src="https://illustrations.popsy.co/white/product-launch.svg"
+              src="/icons/collaborateur.jpg"
               alt="Collaboration d'équipe"
               width={500}
               height={500}
@@ -124,7 +124,7 @@ export default function AuthPage({ type }: AuthPageProps) {
             />
             <div className="text-center backdrop-blur-sm rounded-xl mt-4">
               <h2 className="text-3xl font-bold text-black">
-                Plateforme de Gestion DepannPC
+                Plateforme de Gestion de Projet
               </h2>
               <p className="mt-4 text-gray-600 text-lg font-semibold leading-relaxed">
                 Collaborez efficacement avec votre équipe de développement dans
@@ -143,8 +143,8 @@ export default function AuthPage({ type }: AuthPageProps) {
           <div className="w-full max-w-md space-y-8">
             <div className="text-center">
               <Image
-                src="/depannPc.jpg"
-                alt="DepannPC Logo"
+                src="/icons/app-logoc.png"
+                alt="Logo"
                 width={150}
                 height={50}
                 className="mx-auto"

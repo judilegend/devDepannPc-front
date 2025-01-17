@@ -68,9 +68,9 @@ const InstallPWA: React.FC = () => {
   return (
     <button
       onClick={handleInstallClick}
-      className="fixed bottom-4 right-4 flex items-center gap-2 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors z-50"
+      className="fixed bottom-4 right-4 flex items-center gap-2  text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors z-50"
     >
-      <svg
+      {/* <svg
         className="w-5 h-5"
         fill="none"
         stroke="currentColor"
@@ -82,7 +82,7 @@ const InstallPWA: React.FC = () => {
           strokeWidth={2}
           d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
         />
-      </svg>
+      </svg> */}
       {/* Installer l'application */}
     </button>
   );
