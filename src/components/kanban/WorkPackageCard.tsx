@@ -76,7 +76,7 @@ export function WorkPackageCard({
 
   return (
     <>
-      <Card className="bg-white shadow-sm">
+      <Card className="bg-white shadow-lg">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-xl font-semibold">
             {workPackage.title}

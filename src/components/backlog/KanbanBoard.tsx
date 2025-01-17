@@ -1,4 +1,5 @@
 "use client";
+
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Task, ApiTask } from "@/types/task";
 import { BacklogCard } from "./BacklogCard";
@@ -8,10 +9,10 @@ import { useAuth } from "@/contexts/AuthContext";
 import toast from "react-hot-toast";
 
 const columns = {
-  todo: { title: "À faire", color: "border-blue-500" },
-  in_progress: { title: "En cours", color: "border-yellow-500" },
-  review: { title: "En révision", color: "border-purple-500" },
-  done: { title: "Terminé", color: "border-green-500" },
+  todo: { title: "À faire", color: "bg-blue-50 border-blue-500" },
+  in_progress: { title: "En cours", color: "bg-yellow-50 border-yellow-500" },
+  review: { title: "En révision", color: "bg-purple-50 border-purple-500" },
+  done: { title: "Terminé", color: "bg-green-50 border-green-500" },
 };
 
 export const KanbanBoard = memo(function KanbanBoard({
@@ -23,11 +24,11 @@ export const KanbanBoard = memo(function KanbanBoard({
   tasks: ApiTask[];
   onUpdateTask: (id: number, update: { status: string }) => void;
 }) {
-  //definir permission
   const { user } = useAuth();
+
   const normalizedTasks = useMemo(
     () =>
-      tasks.map((task, index) => ({
+      tasks.map((task) => ({
         id: task.task_id,
         title: task.task_title,
         description: task.task_description,
@@ -101,6 +102,7 @@ export const KanbanBoard = memo(function KanbanBoard({
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          className="bg-white rounded-lg shadow-md p-4 border hover:shadow-lg transition-shadow"
         >
           <BacklogCard task={task} projectId={projectId} />
         </div>
@@ -110,17 +112,17 @@ export const KanbanBoard = memo(function KanbanBoard({
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {Object.entries(columns).map(([status, { title, color }]) => (
           <Droppable key={`column-${status}`} droppableId={status}>
             {(provided) => (
               <div
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                className={`bg-white rounded-lg shadow p-4 border-t-4 ${color}`}
+                className={`rounded-lg shadow-lg p-4 border-t-4 ${color} min-h-[200px]`}
               >
-                <h3 className="font-semibold mb-4">{title}</h3>
-                <div className="space-y-3">
+                <h3 className="font-semibold text-gray-700 mb-4">{title}</h3>
+                <div className="space-y-4">
                   {organizedTasks[status]?.map((task, index) =>
                     renderDraggable(task, index)
                   )}

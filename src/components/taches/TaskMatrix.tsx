@@ -51,7 +51,7 @@ export function TaskMatrix() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <Card className="border-red-200">
+      <Card className="border-red-200 shadow-lg">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-red-700">
             Important & Urgent
@@ -73,7 +73,7 @@ export function TaskMatrix() {
         </CardContent>
       </Card>
 
-      <Card className="border-yellow-200">
+      <Card className="border-yellow-200 shadow-lg">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-yellow-700">
             Important & Non Urgent
@@ -95,7 +95,7 @@ export function TaskMatrix() {
         </CardContent>
       </Card>
 
-      <Card className="border-orange-200">
+      <Card className="border-orange-200 shadow-lg">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-orange-700">
             Non Important & Urgent
@@ -117,7 +117,7 @@ export function TaskMatrix() {
         </CardContent>
       </Card>
 
-      <Card className="border-green-200">
+      <Card className="border-green-200 shadow-lg">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-green-700">
             Non Important & Non Urgent
