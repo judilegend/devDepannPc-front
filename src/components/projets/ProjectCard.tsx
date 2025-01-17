@@ -1,4 +1,5 @@
 "use client";
+
 import { Project } from "@/types/project";
 import {
   Card,
@@ -40,9 +41,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ project }: ProjectCardProps) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  //definir autorisation
   const { user } = useAuth();
-
   const { canEditProject, canDeleteProject } = useProjectGuards();
 
   const getStatusColor = (status: string) => {
@@ -78,7 +77,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   };
 
   return (
-    <Card className="hover:shadow-lg transition-all duration-300 bg-white border-gray-100">
+    <Card className="hover:shadow-xl relative transition-all duration-300 bg-white border-gray-100 rounded-lg overflow-hidden">
+      {/* Teinte Arrière-Plan */}
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-100 via-purple-50 to-white opacity-60 -z-10"></div>
+
       <CardHeader className="pb-4">
         <div className="flex justify-between items-start">
           <CardTitle className="text-xl font-semibold text-gray-900">
@@ -154,8 +156,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Progression</span>
+          <div className="flex justify-between  text-sm">
+            <span className="text-gray-600 font-semibold">Progression</span>
             <span className="font-medium">{project.progress}%</span>
           </div>
           <div className="w-full bg-gray-100 rounded-full h-2">
@@ -170,7 +172,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </CardContent>
 
       <CardFooter className="pt-4 flex justify-between items-center border-t">
-        <span className="text-xs text-gray-500">
+        <span className="text-xs font-semibold text-gray-500">
           Créé le {formatDate(project.createdAt)}
         </span>
         <Link href={`/projets/${project.id}/kanban`}>
@@ -179,7 +181,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             className="bg-gray-50 text-gray-500 gap-2 group"
           >
             <Layout className="h-4 w-4" />
-            Interface Kanban
+            Structure projet
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </Link>

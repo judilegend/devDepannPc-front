@@ -20,16 +20,9 @@ export function LoadingSpinner() {
   if (!isLoading) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50">
-      <div className="dot-spinner">
-        <div className="dot-spinner__dot"></div>
-        <div className="dot-spinner__dot"></div>
-        <div className="dot-spinner__dot"></div>
-        <div className="dot-spinner__dot"></div>
-        <div className="dot-spinner__dot"></div>
-        <div className="dot-spinner__dot"></div>
-        <div className="dot-spinner__dot"></div>
-        <div className="dot-spinner__dot"></div>
+    <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50">
+      <div className="spinner">
+        <div className="spinnerin"></div>
       </div>
     </div>
   );

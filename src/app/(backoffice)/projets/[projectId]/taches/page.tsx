@@ -64,8 +64,8 @@ export default function ProjectTasksPage() {
   return (
     <div className="container mx-auto py-6">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <div className="mb-6">
+        <div className="lg:col-span-2 px-3">
+          <div className="mb-6 ">
             <h1 className="text-2xl font-bold">Mes Tâches</h1>
             <div className="flex justify-between items-center mt-2">
               <p className="text-sm text-gray-500">
@@ -77,7 +77,7 @@ export default function ProjectTasksPage() {
             </div>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-8 ">
             {taskStatusSections.map(({ status, title }) => {
               const tasks = getTasksByStatus(status);
               return (

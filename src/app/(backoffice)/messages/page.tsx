@@ -27,7 +27,7 @@ export default function MessagesPage() {
 
   return (
     <MessageProvider>
-      <div className="container z-[-100px] mx-auto p-2 md:p-4 lg:p-8 h-[calc(100vh-6rem)]">
+      <div className="container z-[-100px] mx-auto mt-8 h-[calc(100vh-6rem)]">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full">
           <div className="flex h-full relative">
             {/* Mobile menu toggle */}

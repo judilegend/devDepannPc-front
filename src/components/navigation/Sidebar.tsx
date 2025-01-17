@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import {
   LayoutDashboard,
@@ -9,8 +10,9 @@ import {
   PlusCircle,
   Activity,
   Users,
+  ChevronRight,
+  ChevronLeft,
 } from "lucide-react";
-import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
@@ -18,34 +20,37 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useCurrentProject } from "@/contexts/CurrentProjectContext";
 import CreateProjectDialog from "../projets/CreateProjectDialog";
 import { LoadingSpinner } from "../ui/loading-spinner";
-import { Logo } from "../ui/Logo";
+import Image from "next/image";
+
 interface SidebarProps {
   className?: string;
+  onCollapse: any;
 }
+
 import { useProjectGuards } from "@/middleware/guards/projectGuards";
 import { useUserGuards } from "@/middleware/guards/userGuards";
 
-export function AppSidebar({ className }: SidebarProps) {
-  //permission user management access
+export function AppSidebar({ className, onCollapse }: SidebarProps) {
   const { canAccessUserManagement } = useUserGuards();
-
   const { user, isAuthenticated } = useAuth();
   const { currentProject } = useCurrentProject();
   const router = useRouter();
   const pathname = usePathname();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const userInitial = user?.username ? user.username[0].toUpperCase() : "U";
   const { canCreateProject } = useProjectGuards();
-  // console.log("Sidebar user:", user); // Debug log
-  // console.log("Can create project:", canCreateProject()); // Debug log
 
+  //props pour le collapse
+
+  const toggleSidebar = () => {
+    const newCollapsedState = !isCollapsed;
+    setIsCollapsed(newCollapsedState);
+    onCollapse(newCollapsedState); // Notify parent component
+  };
   const menuItems = [
-    {
-      title: "Tableau de bord",
-      url: "/dashboard",
-      icon: LayoutDashboard,
-    },
+    { title: "Tableau de bord", url: "/dashboard", icon: LayoutDashboard },
     {
       title: "Organiser projet",
       url: currentProject ? `/projets/${currentProject.id}/kanban` : "",
@@ -73,12 +78,7 @@ export function AppSidebar({ className }: SidebarProps) {
       icon: ListTodo,
       requiresProject: true,
     },
-
-    {
-      title: "Messages",
-      url: "/messages",
-      icon: MessageSquare,
-    },
+    { title: "Messages", url: "/messages", icon: MessageSquare },
     {
       title: "Gerer user",
       url: "/gestion-utilisateurs",
@@ -108,68 +108,86 @@ export function AppSidebar({ className }: SidebarProps) {
       {isLoading && <LoadingSpinner />}
       <aside
         className={cn(
-          "hidden lg:flex w-64 bg-white shadow-lg h-screen",
+          "flex flex-col h-screen bg-white shadow-lg transition-all",
+          isCollapsed ? "w-20" : "w-64",
           className
         )}
+        aria-label="Sidebar"
       >
-        <div className="flex h-full flex-col">
-          <div className="p-4 border-b text-xl font-semibold mt-4">
-            <Logo />{" "}
-          </div>
-
-          {isAuthenticated && canCreateProject() && (
-            <div className="p-4 mt-2">
-              <Button onClick={() => setIsCreateModalOpen(true)}>
-                <PlusCircle className="h-5 w-5 mr-2" />
-                Créer un projet
-              </Button>
-            </div>
+        {/* Toggle Button and Logo Section */}
+        <div
+          className={cn(
+            "p-2 flex items-center justify-between relative",
+            isCollapsed ? "mt-4" : "border-b"
           )}
-          <nav className="flex-1 space-y-1 px-4 py-2">
-            {menuItems.map((item) => (
-              <button
-                key={item.title}
-                onClick={() => handleNavigation(item.url, item.requiresProject)}
-                disabled={item.requiresProject && !currentProject}
-                className={cn(
-                  "flex w-full items-center gap-3 rounded-lg px-3 py-2 transition-colors relative group",
-                  pathname === item.url
-                    ? "bg-gray-100"
-                    : "text-gray-700 hover:bg-gray-100 hover:text-gray-900",
-                  item.requiresProject &&
-                    !currentProject &&
-                    "opacity-50 cursor-not-allowed"
-                )}
-              >
-                <item.icon
-                  className={cn(
-                    "h-5 w-5",
-                    pathname === item.url
-                      ? "text-gray-500"
-                      : "text-gray-500 group-hover:text-gray-900"
-                  )}
-                />
-                <span
-                  className={cn(
-                    "font-medium",
-                    pathname === item.url
-                      ? "text-gray-500"
-                      : "text-gray-700 group-hover:text-gray-900"
-                  )}
-                >
-                  {item.title}
-                </span>
-                {pathname === item.url && (
-                  <span className="absolute inset-y-0 left-0 w-1 bg-white rounded-full" />
-                )}
-              </button>
-            ))}
-          </nav>
+        >
+          <div>
+            <Image
+              src={isCollapsed ? "/icons/app-logo.png" : "/icons/app-logoc.png"}
+              alt="Logo"
+              width={isCollapsed ? 40 : 150}
+              height={isCollapsed ? 40 : 50}
+              className="mx-auto ml-3"
+              priority
+            />
+          </div>
+          <button
+            onClick={toggleSidebar}
+            className="p-2 rounded-md hover:bg-gray-100 absolute -right-6 bg-white shadow-md"
+            aria-label="Toggle sidebar"
+          >
+            {isCollapsed ? (
+              <ChevronRight className="h-5 w-5 text-gray-800" />
+            ) : (
+              <ChevronLeft className="h-5 w-5 text-gray-800" />
+            )}
+          </button>
+        </div>
 
-          <div className="border-t p-4 mt-auto">
+        {/* Create Project Button */}
+        {isAuthenticated && canCreateProject() && !isCollapsed && (
+          <div className="p-4">
+            <Button
+              onClick={() => setIsCreateModalOpen(true)}
+              className="w-full flex items-center justify-center gap-2"
+            >
+              <PlusCircle className="h-5 w-5" /> Créer un projet
+            </Button>
+          </div>
+        )}
+
+        {/* Navigation Menu */}
+        <nav className="flex-1 px-4 py-2 space-y-1">
+          {menuItems.map((item) => (
+            <button
+              key={item.title}
+              onClick={() => handleNavigation(item.url, item.requiresProject)}
+              disabled={item.requiresProject && !currentProject}
+              className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all group w-full",
+                pathname === item.url
+                  ? "bg-primary text-white shadow"
+                  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900",
+                item.requiresProject &&
+                  !currentProject &&
+                  "opacity-50 cursor-not-allowed"
+              )}
+              aria-disabled={item.requiresProject && !currentProject}
+            >
+              <item.icon className="h-5 w-5" />
+              {!isCollapsed && (
+                <span className="w-full text-left">{item.title}</span>
+              )}
+            </button>
+          ))}
+        </nav>
+
+        {/* User Profile Section */}
+        {!isCollapsed && (
+          <div className="p-4 border-t">
             <div className="flex items-center gap-3 rounded-lg bg-gray-50 p-3 hover:bg-gray-100 transition-colors">
               <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <span className="text-primary font-medium">{userInitial}</span>
+                <span className="text-primary font-bold">{userInitial}</span>
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 truncate">
@@ -179,8 +197,9 @@ export function AppSidebar({ className }: SidebarProps) {
               </div>
             </div>
           </div>
-        </div>
+        )}
 
+        {/* Create Project Modal */}
         <CreateProjectDialog
           isOpen={isCreateModalOpen}
           onClose={() => setIsCreateModalOpen(false)}

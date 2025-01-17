@@ -22,6 +22,7 @@ import { Logo } from "../ui/Logo";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "../ui/sheet";
 import { useUserGuards } from "@/middleware/guards/userGuards";
 import { useProjectGuards } from "@/middleware/guards/projectGuards";
+import Image from "next/image";
 
 interface MobileSidebarProps {
   isOpen: boolean;
@@ -120,7 +121,14 @@ export function MobileSidebar({ isOpen, onOpenChange }: MobileSidebarProps) {
           <SheetTitle className="sr-only">Menu de navigation mobile</SheetTitle>
           <div className="flex h-full flex-col">
             <div className="p-4 border-b text-xl font-semibold">
-              <Logo />
+              <Image
+                src="/icons/app-logoc.png"
+                alt="Logo"
+                width={150}
+                height={50}
+                className="mx-auto"
+                priority
+              />{" "}
             </div>
 
             {isAuthenticated && canCreateProject() && (
