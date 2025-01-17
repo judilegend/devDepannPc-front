@@ -8,7 +8,7 @@ import { Mail, Lock, ArrowRight, Loader2, UserPlus, User } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
 import { LoadingSpinner } from "../ui/loading-spinner";
-
+import { AuthCarousel } from "./ImageCarousel";
 interface AuthFormData {
   username?: string;
   email: string;
@@ -111,27 +111,9 @@ export default function AuthPage({ type }: AuthPageProps) {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="hidden lg:flex lg:w-3/5 bg-white items-center  justify-center  relative overflow-hidden"
+          className="hidden lg:flex lg:w-3/5 bg-white items-center justify-center relative overflow-hidden"
         >
-          <div className="relative z-10 max-w-4xl">
-            <Image
-              src="/icons/collaborateur.jpg"
-              alt="Collaboration d'équipe"
-              width={500}
-              height={500}
-              className="w-full transform hover:scale-105 transition-transform duration-500"
-              priority
-            />
-            <div className="text-center backdrop-blur-sm rounded-xl mt-4">
-              <h2 className="text-3xl font-bold text-black">
-                Plateforme de Gestion de Projet
-              </h2>
-              <p className="mt-4 text-gray-600 text-lg font-semibold leading-relaxed">
-                Collaborez efficacement avec votre équipe de développement dans
-                un environnement intuitif et professionnel.
-              </p>
-            </div>
-          </div>
+          <AuthCarousel />
         </motion.div>
 
         <motion.div
