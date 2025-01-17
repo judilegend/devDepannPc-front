@@ -16,7 +16,11 @@ export const taskStatusMiddleware = {
     user,
   }: TaskStatusTransition): boolean {
     // Super users can do anything
-    if (["lead_developer", "tech_lead", "scrum_master"].includes(user.role)) {
+    if (
+      ["lead_developer", "tech_lead", "scrum_master", "admin"].includes(
+        user.role
+      )
+    ) {
       return true;
     }
 

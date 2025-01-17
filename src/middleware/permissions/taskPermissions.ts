@@ -10,12 +10,22 @@ export const taskPermissions = {
   },
 
   canMarkAsDone: (role?: string) => {
-    const allowedRoles = ["scrum_master", "lead_developer", "tech_lead"];
+    const allowedRoles = [
+      "scrum_master",
+      "lead_developer",
+      "tech_lead",
+      "admin",
+    ];
     return role && allowedRoles.includes(role);
   },
 
   canMarkAsRedo: (role?: string) => {
-    const allowedRoles = ["scrum_master", "lead_developer", "tech_lead"];
+    const allowedRoles = [
+      "scrum_master",
+      "lead_developer",
+      "tech_lead",
+      "admin",
+    ];
     return role && allowedRoles.includes(role);
   },
 
@@ -26,7 +36,7 @@ export const taskPermissions = {
     currentStatus: string,
     newStatus: string
   ) => {
-    const leadRoles = ["scrum_master", "lead_developer", "tech_lead"];
+    const leadRoles = ["scrum_master", "lead_developer", "tech_lead", "admin"];
 
     if (leadRoles.includes(role)) {
       return true;
@@ -51,7 +61,7 @@ export const taskPermissions = {
     if (role === "developer") {
       return currentStatus === "in_progress" && newStatus === "review";
     }
-    const leadRoles = ["scrum_master", "lead_developer", "tech_lead"];
+    const leadRoles = ["scrum_master", "lead_developer", "tech_lead", "admin"];
     return leadRoles.includes(role || "");
   },
 };

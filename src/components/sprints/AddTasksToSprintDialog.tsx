@@ -50,7 +50,7 @@ export function AddTasksToSprintDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
-          <DialogTitle>Add Tasks to Sprint</DialogTitle>
+          <DialogTitle>Ajouter Taches dans le sprint</DialogTitle>
         </DialogHeader>
 
         <ScrollArea className="h-[300px] w-full pr-4">
@@ -80,10 +80,10 @@ export function AddTasksToSprintDialog({
 
         <div className="flex justify-end space-x-2">
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
+            Annuler
           </Button>
           <Button onClick={handleSubmit} disabled={selectedTasks.length === 0}>
-            Add Selected Tasks
+            ajouter le(s) taches selectionée(s)
           </Button>
         </div>
       </DialogContent>
