@@ -62,7 +62,7 @@ export default function AddUserDialog() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-black hover:bg-gray-800">
+        <Button className="bg-primary hover:bg-gray-800">
           <Plus className="mr-2 h-4 w-4" />
           Ajouter un utilisateur
         </Button>
