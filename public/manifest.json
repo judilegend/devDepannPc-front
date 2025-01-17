@@ -1,0 +1,39 @@
+{
+  "name": "AgileTime PWA",
+  "short_name": "MonApp",
+  "description": "Une application Next.js PWA installable via un navigateur",
+  "icons": [
+    {
+      "src": "/icons/app-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/app-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "categories": ["productivity"],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "url": "/dashboard",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icons/app-logo.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ]
+}

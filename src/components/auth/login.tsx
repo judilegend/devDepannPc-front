@@ -87,14 +87,14 @@ export default function AuthPage() {
       >
         <div className="relative z-10 max-w-2xl">
           {/* Main Illustration */}
-          <Image
+          {/* <Image
             src="https://illustrations.popsy.co/white/product-launch.svg"
             alt="Collaboration d'équipe"
             width={500}
             height={500}
             className="w-full transform hover:scale-105 transition-transform duration-500"
             priority
-          />
+          /> */}
           {/* Text Content */}
           <div className="text-center  backdrop-blur-sm rounded-xl  ">
             <h2 className="text-3xl font-bold text-black">
