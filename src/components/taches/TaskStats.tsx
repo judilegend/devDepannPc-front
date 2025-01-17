@@ -22,13 +22,13 @@ export function TaskStats({ tasks }: TaskStatsProps) {
   );
 
   return (
-    <Card className="p-6">
-      <h2 className="text-xl font-semibold mb-4">Progress Overview</h2>
+    <Card className="p-6 shadow-lg">
+      <h2 className="text-xl font-semibold mb-4">Aperçu de la progression</h2>
 
       <div className="space-y-6">
         <div>
           <div className="flex justify-between text-sm mb-2">
-            <span>Task Completion</span>
+            <span>Progression des tâches</span>
             <span>{Math.round(completionRate)}%</span>
           </div>
           <Progress value={completionRate} className="h-2" />
@@ -39,21 +39,20 @@ export function TaskStats({ tasks }: TaskStatsProps) {
             <div className="text-2xl font-bold">
               {completedTasks}/{totalTasks}
             </div>
-            <div className="text-sm text-gray-600">Tasks Completed</div>
+            <div className="text-sm text-gray-600">Tâches terminées</div>
           </div>
           <div className="bg-gray-50 p-4 rounded-lg">
             <div className="text-2xl font-bold">
               {completedPomodoros}/{totalPomodoros}
             </div>
-            <div className="text-sm text-gray-600">Pomodoros Completed</div>
+            <div className="text-sm text-gray-600">Pomodoros complétés</div>
           </div>
         </div>
-
         <div className="space-y-2">
-          <h3 className="font-medium">Time Distribution</h3>
+          <h3 className="font-medium">Répartition du temps</h3>
           <div className="bg-gray-50 p-4 rounded-lg">
             <div className="flex justify-between items-center">
-              <span>Focus Time</span>
+              <span>Temps de concentration</span>
               <span>{completedPomodoros * 25} minutes</span>
             </div>
           </div>

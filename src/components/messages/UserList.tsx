@@ -182,7 +182,7 @@ export const UserList = ({ currentUserId, onUserSelect }: UserListProps) => {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Create New Group</DialogTitle>
+              <DialogTitle>Créer un nouveau groupe</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 pt-4">
               <Input
@@ -191,7 +191,7 @@ export const UserList = ({ currentUserId, onUserSelect }: UserListProps) => {
                 onChange={(e) => setRoomName(e.target.value)}
               />
               <div className="space-y-2 max-h-60 overflow-y-auto">
-                <p className="text-sm font-medium">Select Members:</p>
+                <p className="text-sm font-medium">Selectionner membre:</p>
                 {users.map((user) => (
                   <div
                     key={user.id}
@@ -218,7 +218,7 @@ export const UserList = ({ currentUserId, onUserSelect }: UserListProps) => {
                 disabled={!roomName || selectedMembers.length === 0}
                 className="w-full"
               >
-                Create Group
+                Créer groupe
               </Button>
             </div>
           </DialogContent>
@@ -230,7 +230,7 @@ export const UserList = ({ currentUserId, onUserSelect }: UserListProps) => {
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           <Input
-            placeholder="Search conversations..."
+            placeholder="Chercher contact..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"

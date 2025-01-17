@@ -15,7 +15,7 @@ export const MessageHeader = () => {
     return (
       <div className="border-b p-4 bg-white">
         <p className="text-gray-500">
-          Select a conversation to start messaging
+          Sélectionnez une conversation pour commencer à envoyer des messages.
         </p>
       </div>
     );
@@ -38,7 +38,7 @@ export const MessageHeader = () => {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <p className="text-sm text-gray-500 truncate">
-                    {selectedRoom?.members?.length} members
+                    {/* {selectedRoom?.members?.length} members */}
                   </p>
                 </TooltipTrigger>
                 <TooltipContent>

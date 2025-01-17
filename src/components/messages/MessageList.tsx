@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useMessages } from "@/contexts/MessageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { FileIcon } from "lucide-react";
 
@@ -120,7 +121,6 @@ export const MessageList: React.FC = () => {
           )}
           {message.attachments && message.attachments.length > 0 && (
             <div className="mt-2 space-y-2">
-              Vous
               {message.attachments.map((attachment) => (
                 <div key={attachment.id} className="max-w-sm">
                   {renderAttachment(attachment)}
@@ -138,7 +138,7 @@ export const MessageList: React.FC = () => {
               isCurrentUser ? "text-white/70" : "text-gray-500"
             } mt-1 block`}
           >
-            {format(new Date(message.createdAt), "HH:mm")}
+            {format(new Date(message.createdAt), "HH:mm", { locale: fr })}
           </span>
         </div>
       </div>
@@ -148,7 +148,9 @@ export const MessageList: React.FC = () => {
   const groupMessagesByDate = (messages: Message[]) => {
     const groups: { [key: string]: Message[] } = {};
     messages.forEach((message) => {
-      const date = format(new Date(message.createdAt), "MMMM d, yyyy");
+      const date = format(new Date(message.createdAt), "d MMMM yyyy", {
+        locale: fr,
+      });
       if (!groups[date]) {
         groups[date] = [];
       }
@@ -161,7 +163,7 @@ export const MessageList: React.FC = () => {
     return (
       <div className="flex-1 flex items-center justify-center bg-gray-50">
         <div className="text-center text-gray-500">
-          <p className="text-lg">👈 Select a conversation to start messaging</p>
+          <p className="text-lg">👈 Sélectionnez une conversation</p>
         </div>
       </div>
     );
@@ -180,10 +182,10 @@ export const MessageList: React.FC = () => {
     return (
       <div className="flex-1 flex items-center justify-center bg-gray-50">
         <div className="text-center text-gray-500">
-          <p className="text-lg">No messages yet</p>
+          <p className="text-lg">Pas encore de messages</p>
           <p className="text-sm mt-2">
-            Start the conversation with{" "}
-            {isGroupChat ? selectedRoom?.name : selectedUser?.username}!
+            Commencez la conversation avec{" "}
+            {isGroupChat ? selectedRoom?.name : selectedUser?.username} !
           </p>
         </div>
       </div>

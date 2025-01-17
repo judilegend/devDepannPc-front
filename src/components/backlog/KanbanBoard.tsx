@@ -112,14 +112,14 @@ export const KanbanBoard = memo(function KanbanBoard({
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="flex overflow-x-auto gap-6  w-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
         {Object.entries(columns).map(([status, { title, color }]) => (
           <Droppable key={`column-${status}`} droppableId={status}>
             {(provided) => (
               <div
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                className={`rounded-lg shadow-lg p-4 border-t-4 ${color} min-h-[200px]`}
+                className={`rounded-lg shadow-lg p-4 border-t-4 ${color} min-h-[300px] min-w-[300px] max-w-[400px] 2xl:max-w-[5500px] `}
               >
                 <h3 className="font-semibold text-gray-700 mb-4">{title}</h3>
                 <div className="space-y-4">

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useMessages } from "@/contexts/MessageContext";
-import { Paperclip, Send, X } from "lucide-react";
+import { Paperclip, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -35,20 +35,14 @@ export const MessageInput = () => {
           message,
           selectedFile
         );
-        setSelectedFile(null);
-        if (fileInputRef.current) {
-          fileInputRef.current.value = "";
-        }
+        clearFileSelection();
       } else {
         await sendGroupMessage(selectedRoom.id, message);
       }
     } else if (selectedUser) {
       if (selectedFile) {
         await sendMessageWithAttachment(selectedUser.id, message, selectedFile);
-        setSelectedFile(null);
-        if (fileInputRef.current) {
-          fileInputRef.current.value = "";
-        }
+        clearFileSelection();
       } else {
         await sendMessage(selectedUser.id, message);
       }
@@ -56,16 +50,21 @@ export const MessageInput = () => {
     setMessage("");
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e as unknown as React.FormEvent);
+    }
+  };
+
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Vérification de la taille (10MB max)
       if (file.size > 10 * 1024 * 1024) {
-        alert("File size should be less than 10MB");
+        alert("Le fichier doit être inférieur à 10 Mo.");
         return;
       }
 
-      // Liste des types de fichiers acceptés
       const allowedTypes = [
         "image/",
         "application/pdf",
@@ -84,7 +83,7 @@ export const MessageInput = () => {
 
       if (!isAllowedType) {
         alert(
-          "File type not supported. Allowed types: images, PDF, DOC, DOCX, XLS, XLSX, TXT, ZIP"
+          "Type de fichier non supporté. Types acceptés : Images, PDF, DOC, DOCX, XLS, XLSX, TXT, ZIP."
         );
         return;
       }
@@ -100,20 +99,18 @@ export const MessageInput = () => {
       return (
         <img
           src={URL.createObjectURL(selectedFile)}
-          alt="Preview"
-          className="h-16 w-16 object-cover rounded"
+          alt="Aperçu"
+          className="h-12 w-12 object-cover rounded-lg"
         />
       );
     }
 
     return (
-      <div className="flex items-center space-x-2">
-        <div className="bg-gray-200 p-2 rounded">
-          <span className="text-sm">{selectedFile.name}</span>
-          <span className="text-xs text-gray-500 block">
-            {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
-          </span>
-        </div>
+      <div className="bg-gray-100 p-2 rounded-lg text-sm">
+        <span>{selectedFile.name}</span>
+        <span className="block text-xs text-gray-500">
+          {(selectedFile.size / 1024 / 1024).toFixed(2)} Mo
+        </span>
       </div>
     );
   };
@@ -126,24 +123,25 @@ export const MessageInput = () => {
   };
 
   return (
-    <div className="border-t bg-white p-4">
-      <form onSubmit={handleSubmit} className="flex items-end space-x-4">
+    <div className="border-t bg-gray-50 p-4">
+      <form onSubmit={handleSubmit} className="flex items-end gap-4">
         <div className="flex-1 space-y-2">
           {selectedFile && (
-            <div className="flex items-center justify-between bg-gray-100 p-2 rounded">
+            <div className="flex items-center justify-between bg-gray-200 p-2 rounded-lg">
               {getFilePreview()}
               <Button
                 type="button"
                 variant="ghost"
                 size="sm"
                 onClick={clearFileSelection}
+                className="text-red-500 hover:bg-red-100"
               >
                 <X className="h-4 w-4" />
               </Button>
             </div>
           )}
 
-          <div className="flex space-x-2">
+          <div className="flex items-center gap-2">
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -151,12 +149,13 @@ export const MessageInput = () => {
                   variant="ghost"
                   size="icon"
                   onClick={() => fileInputRef.current?.click()}
+                  className="hover:bg-blue-100 text-blue-500"
                 >
                   <Paperclip className="h-5 w-5" />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
-                Attach file (Images, PDF, DOC, DOCX, XLS, XLSX, TXT, ZIP)
+                Joindre un fichier (Images, PDF, DOC, DOCX, XLS, XLSX, TXT, ZIP)
               </TooltipContent>
             </Tooltip>
 
@@ -171,9 +170,10 @@ export const MessageInput = () => {
             <Textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Type your message..."
-              className="flex-1 min-h-[20px] max-h-[120px] resize-none"
-              rows={1}
+              onKeyDown={handleKeyDown}
+              placeholder="Écrivez votre message..."
+              className="flex-1 min-h-[50px] max-h-[150px] resize-none rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+              rows={2}
             />
           </div>
         </div>
@@ -182,8 +182,25 @@ export const MessageInput = () => {
           type="submit"
           size="icon"
           disabled={!message.trim() && !selectedFile}
+          className="bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center p-3 rounded-full"
         >
-          <Send className="h-5 w-5" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 48 48"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="h-10 w-10"
+          >
+            <path
+              fill="currentColor"
+              d="M24 4C12.95 4 4 12.95 4 24c0 4.8 1.75 9.2 4.66 12.67L6.5 41.5c-.4 1.2 1 2.3 2.1 1.7l5.9-3.2C17.55 41.3 20.7 42 24 42c11.05 0 20-8.95 20-20S35.05 4 24 4z"
+            />
+            <path
+              fill="white"
+              d="M15.35 26.85l6.5-7c.4-.4 1-.4 1.4 0l4.2 4.6 5.15-7.3c.3-.5 1-.5 1.5 0l6.15 7.15c.5.6-.2 1.6-.9 1.2l-6.55-3.85-4.85 6.9c-.3.4-1 .4-1.4 0l-4.15-4.5-5.85 5.5c-.4.4-1.1 0-.9-.7z"
+            />
+          </svg>
         </Button>
       </form>
     </div>
