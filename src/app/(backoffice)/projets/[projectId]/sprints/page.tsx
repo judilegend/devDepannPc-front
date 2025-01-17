@@ -20,12 +20,12 @@ export default function ProjectSprintsPage() {
   return (
     <SprintProvider>
       <div className="container mx-auto py-6">
-        <div className="flex justify-between items-start mb-6">
+        <div className="flex justify-between items-start ">
           <SprintHeader />
           {canCreateSprint() && (
-            <Button onClick={() => setOpen(true)}>
+            <Button onClick={() => setOpen(true)} className="bg-primary">
               <Plus className="mr-2 h-4 w-4" />
-              New Sprint
+              Nouveau Sprint
             </Button>
           )}
         </div>

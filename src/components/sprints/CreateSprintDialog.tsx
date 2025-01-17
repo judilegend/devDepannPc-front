@@ -54,18 +54,18 @@ export function CreateSprintDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
-          <DialogTitle>Create New Sprint</DialogTitle>
+          <DialogTitle>Créer un Sprint</DialogTitle>
           <DialogDescription>
-            Add a new sprint with its details and timeframe.
+            Ajoutez un nouveau sprint avec ses détails et sa période.
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="name">Sprint Title</Label>
+            <Label htmlFor="name">Titre du Sprint</Label>
             <Input
               id="name"
-              placeholder="Enter sprint title"
+              placeholder="Entrez le titre du sprint"
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
@@ -75,10 +75,10 @@ export function CreateSprintDialog({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="goal">Sprint Goal</Label>
+            <Label htmlFor="goal">Objectif du Sprint</Label>
             <Textarea
               id="goal"
-              placeholder="What do you want to achieve in this sprint?"
+              placeholder="Que voulez-vous accomplir pendant ce sprint ?"
               value={formData.goal}
               onChange={(e) =>
                 setFormData({ ...formData, goal: e.target.value })
@@ -89,7 +89,7 @@ export function CreateSprintDialog({
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>Start Date</Label>
+              <Label>Date de Début</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
@@ -103,7 +103,7 @@ export function CreateSprintDialog({
                     {formData.startDate ? (
                       format(formData.startDate, "PPP")
                     ) : (
-                      <span>Pick a date</span>
+                      <span>Sélectionnez une date</span>
                     )}
                   </Button>
                 </PopoverTrigger>
@@ -121,7 +121,7 @@ export function CreateSprintDialog({
             </div>
 
             <div className="space-y-2">
-              <Label>End Date</Label>
+              <Label>Date de Fin</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
@@ -135,7 +135,7 @@ export function CreateSprintDialog({
                     {formData.endDate ? (
                       format(formData.endDate, "PPP")
                     ) : (
-                      <span>Pick a date</span>
+                      <span>Sélectionnez une date</span>
                     )}
                   </Button>
                 </PopoverTrigger>
@@ -155,9 +155,9 @@ export function CreateSprintDialog({
 
           <div className="flex justify-end space-x-2">
             <Button variant="outline" onClick={() => onOpenChange(false)}>
-              Cancel
+              Annuler
             </Button>
-            <Button type="submit">Create Sprint</Button>
+            <Button type="submit">Créer le Sprint</Button>
           </div>
         </form>
       </DialogContent>

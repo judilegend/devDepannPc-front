@@ -26,7 +26,7 @@ export function SprintFilters() {
     <div className="flex flex-wrap gap-4 mb-6">
       <div className="flex-1 min-w-[200px]">
         <Input
-          placeholder="Search sprints..."
+          placeholder="chercher sprints..."
           onChange={(e) =>
             setFilters((prev) => ({ ...prev, search: e.target.value }))
           }

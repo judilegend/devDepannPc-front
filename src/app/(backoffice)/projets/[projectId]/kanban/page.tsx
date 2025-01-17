@@ -13,7 +13,7 @@ import { WorkPackageList } from "@/components/kanban/WorkPackageList";
 export default function KanbanPage({ params }: { params: any }) {
   return (
     <div className="min-h-screen bg-gray-50 py-6">
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-full mx-auto">
         <div className="space-y-8">
           <Suspense fallback={<div>Chargement des work packages...</div>}>
             <WorkPackageList projectId={params.projectId} />

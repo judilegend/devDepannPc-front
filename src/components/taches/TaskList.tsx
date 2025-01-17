@@ -131,7 +131,10 @@ export function TaskList({ activiteId }: TaskListProps) {
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-semibold">Tâches</h3>
         {user && canCreateTask() && (
-          <Button onClick={() => setIsModalOpen(true)} className="bg-primary">
+          <Button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-blue-100 text-black"
+          >
             <Plus className="h-4 w-4 mr-2" />
             Nouvelle Tâche
           </Button>
