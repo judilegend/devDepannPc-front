@@ -186,16 +186,18 @@ export const UserList = ({ currentUserId, onUserSelect }: UserListProps) => {
             </DialogHeader>
             <div className="space-y-4 pt-4">
               <Input
-                placeholder="Group Name"
+                placeholder="Nom du groupe"
                 value={roomName}
                 onChange={(e) => setRoomName(e.target.value)}
               />
               <div className="space-y-2 max-h-60 overflow-y-auto">
-                <p className="text-sm font-medium">Selectionner membre:</p>
+                <p className="text-sm font-medium">
+                  Sélectionner des membres :
+                </p>
                 {users.map((user) => (
                   <div
-                    key={user.id}
-                    className="flex items-center space-x-2 p-2  rounded-md"
+                    key={`user-${user.id}`}
+                    className="flex items-center space-x-2 p-2 rounded-md"
                   >
                     <input
                       type="checkbox"
@@ -242,7 +244,7 @@ export const UserList = ({ currentUserId, onUserSelect }: UserListProps) => {
       <div className="flex-1 overflow-y-auto space-y-1 p-2">
         {filteredRooms.map((room) => (
           <Button
-            key={room.id}
+            key={`room-${room.id}`}
             variant="ghost"
             className="w-full flex items-center justify-start space-x-3 hover:bg-gray-100"
             onClick={() => handleRoomSelect(room)}
@@ -259,9 +261,9 @@ export const UserList = ({ currentUserId, onUserSelect }: UserListProps) => {
 
         {filteredUsers.map((user) => (
           <Button
-            key={user.id}
+            key={`user-${user.id}`}
             variant="ghost"
-            className="w-full flex items-center justify-start space-x-3 "
+            className="w-full flex items-center justify-start space-x-3"
             onClick={() => handleUserSelect(user)}
           >
             <UserAvatar
@@ -272,7 +274,7 @@ export const UserList = ({ currentUserId, onUserSelect }: UserListProps) => {
             <div>
               <p className="font-medium">{user.username}</p>
               <p className="text-sm text-gray-500">
-                {user.is_online ? "Online" : "Offline"}
+                {user.is_online ? "En ligne" : "Hors ligne"}
               </p>
             </div>
           </Button>

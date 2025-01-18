@@ -125,7 +125,7 @@ export default function AuthPage({ type }: AuthPageProps) {
           <div className="w-full max-w-md space-y-8">
             <div className="text-center">
               <Image
-                src="/icons/app-logoc.png"
+                src="/icons/app-logoce.png"
                 alt="Logo"
                 width={150}
                 height={50}
