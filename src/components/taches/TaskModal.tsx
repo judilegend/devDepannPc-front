@@ -192,11 +192,19 @@ export function TaskModal({
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="0">Non assigné</SelectItem>
-                {users.map((user) => (
-                  <SelectItem key={user.id} value={user.id.toString()}>
-                    {user.username}
-                  </SelectItem>
-                ))}
+                {/* Filtrage des utilisateurs pour exclure les rôles non éligibles */}
+                {users
+                  .filter(
+                    (user) =>
+                      !["admin", "product_owner", "scrum_master"].includes(
+                        user.role.toLowerCase()
+                      )
+                  )
+                  .map((user) => (
+                    <SelectItem key={user.id} value={user.id.toString()}>
+                      {user.username}
+                    </SelectItem>
+                  ))}
               </SelectContent>
             </Select>
           </div>
